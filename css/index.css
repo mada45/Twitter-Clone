@@ -1,0 +1,599 @@
+:root{
+    --light-blue: rgb(113, 201, 248);
+    --dark-blue: rgb(29,161,242);
+    --hover-dark-blue: rgb(26, 145, 218);
+    --hover-light-blue: rgba(113, 201, 248, 0.2);
+    --light-bg: rgb(245, 248, 250);
+    --text-color: #222;
+    --faded-text: #aaa;
+    --border: solid 1px #ddd;
+    --regular: 400;
+    --bold: 700;
+    --extra-bold: 900;
+}
+
+*{
+    padding: 0;
+    margin: 0;
+    font-size: 1rem;
+    font-family: 'Roboto', sans-serif;
+    font-weight: var(--regular);
+    box-sizing: border-box;
+}
+
+body{
+    width: 100%;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 2fr 1.4fr;
+    padding: 0 6rem;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+
+.error{
+    background: rgba(240, 128, 128, 0.4) !important;
+}
+
+.active{
+    background: rgba(113, 201, 248, 0.2)!important;
+    color: var(--dark-blue)!important;
+}
+
+.active a{
+    color: var(--dark-blue)!important;
+}
+
+.mid{
+    display: none!important;
+}
+
+.nothing-to-display{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 2rem;
+    background: var(--light-bg);
+}
+
+.nothing-to-display p{
+    font-weight: var(--bold);
+    font-size: 1.3rem;
+}
+
+#left{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    border-right: var(--border);
+    padding: 0 2rem;
+}
+
+#left div{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 1.5rem;
+    cursor: pointer;
+    padding: 0.7rem 1rem;
+    border-radius: 4rem;
+    font-size: 1.3rem;
+    text-decoration: none;
+    color: var(--text-color);
+    font-weight: var(--bold);
+}
+
+#left div:hover{
+    background: var(--hover-light-blue);
+    color: var(--dark-blue);
+}
+
+#left div:hover a{
+    color: var(--dark-blue);
+}
+
+#left i{
+    font-size: 1.5rem;
+}
+
+#left div:first-child i{
+    color: var(--dark-blue);
+}
+
+#left button{
+    font-weight: var(--bold);
+    width: 100%;
+    margin-bottom: 1rem;
+    border: none;
+    border-radius: 4rem;
+    padding: 1rem;
+    color: white;
+    background: var(--dark-blue);
+    outline: none;
+    cursor: pointer;
+}
+
+#left button:hover{
+    background: var(--hover-dark-blue);
+}
+
+#left article{
+    display: flex;
+    align-items: center;
+    width: 20%;
+    padding: 0.7rem 1rem;
+    position: fixed;
+    bottom: 0;
+    left: 8rem;
+}
+
+#left article div{
+    display: block;
+}
+
+#left article div p:first-child{
+    font-weight: var(--bold);
+}
+
+#left article div p:last-child{
+    color: var(--faded-text);
+}
+
+#left article i{
+    float: right;
+}
+
+#left article img{
+    min-width: 3rem;
+    max-width: 3rem;
+    min-height: 3rem;
+    max-height: 3rem;
+    border-radius: 50%;
+}
+
+#home{
+    display: block!important;
+}
+
+.mid-heading{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem;
+    border-bottom: var(--border);
+}
+
+.mid article h2{
+    font-weight: var(--bold);
+    font-size: 1.3rem;
+    padding: 0.5rem;
+}
+
+.mid i{
+    font-size: 1.3rem;
+    color: var(--dark-blue);
+    padding: 0.5rem;
+    border-radius: 50%;
+}
+
+.mid i:hover{
+    background: var(--hover-light-blue);
+    cursor: pointer;
+}
+
+.mid>form{
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+    border-bottom: 8px solid #ddd;
+}
+
+.mid>form textarea{
+    border: none;
+    width: 100%;
+    margin-top: 1rem;
+    outline: none;
+    font-size: 1.3rem;
+    overflow: hidden;
+    resize: none;
+}
+
+.mid>form>div{
+    margin: 1rem 0;
+}
+
+.mid .tweet-img{
+    padding: 1rem;
+    min-width: 5rem;
+    max-width: 5rem;
+    min-height: 5rem;
+    max-height: 5rem;
+    border-radius: 50%;
+}
+
+.mid a{
+    text-decoration: none;
+}
+
+.mid>form div{
+    width: 100%;
+}
+
+.mid>form div div{
+    display: flex;
+}
+
+.mid #tweet-btn{
+    margin-right: 1rem;
+    font-weight: var(--bold);
+    border: none;
+    border-radius: 4rem;
+    padding: 0.5rem 1rem;
+    color: white;
+    outline: none;
+}
+
+.mid .tweet-btn-enabled{
+    background: var(--dark-blue);
+}
+
+.mid .tweet-btn-enabled:hover{
+    background: var(--hover-dark-blue);
+    cursor: pointer;
+}
+
+.mid .tweet-btn-disabled{
+    background: rgba(29,161,242, 0.4);
+}
+
+.tweet{
+    display: flex;
+    justify-content: flex-start;
+    border-bottom: var(--border);
+    padding: 0 0.5rem 1rem 0;
+    position: relative;
+}
+
+.tweet>div{
+    width: 100%;
+}
+
+.tweet>div div:last-child{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
+}
+
+.tweet>div>div>div{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.tweet .tweet-main-info{
+    margin-bottom: 0.2rem;
+}
+
+.tweet .tweet-main-info i{
+    margin-left: auto;
+    color: var(--text-color) !important;
+    margin-top: 0.5rem;
+    font-size: 1rem !important;
+}
+
+.tweet>div>div>div>i:hover,
+.tweet>div div:last-child i:hover{
+    color: var(--dark-blue) !important;
+}
+
+.tweet .tweet-main-info p{
+    margin-top: 1rem;
+    color: var(--faded-text);
+}
+
+.tweet>div>div>div p{
+    color: rgb(101, 119, 134);
+}
+
+.tweet>div>div>div>p:first-child{
+    font-weight: var(--bold);
+    color: var(--text-color);
+}
+
+.tweet>div div:last-child i{
+    font-size: 1rem !important;
+    color: rgb(101, 119, 134) !important;
+}
+
+.edit-delete-tweet{
+    display: none !important;
+    width: 30%;
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    justify-content: flex-start;
+    flex-direction: column;
+    gap: 0 !important;
+    border-radius: 1rem 0 1rem 1rem;
+    box-shadow: 3px 3px 6px 3px #eee;
+}
+
+.edit-delete-tweet button{
+    border: none;
+    background: var(--light-bg);
+    border-bottom: var(--border);
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    padding: 0.5rem;
+    outline: none;
+}
+
+.edit-delete-tweet button:last-child{
+    border-bottom: none;
+    border-radius: 0 0 1rem 1rem;
+}
+
+.edit-delete-tweet button:first-child{
+    border-radius: 1rem 0 0 0;
+}
+
+.edit-delete-tweet button:hover{
+    background: #eee;
+    cursor: pointer;
+}
+
+.edit-delete-tweet button:hover p,
+.edit-delete-tweet button:hover i{
+    color: var(--dark-blue) !important;
+}
+
+.edit-tweet i:hover{
+    color: red !important;
+}
+
+.edit-tweet-form input{
+    border: var(--border);
+    outline: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4rem;
+}
+
+.edit-tweet-form button{
+    border: none;
+    background: white;
+    outline: none;
+}
+
+.edit-tweet-form i{
+    color: rgb(101, 119, 134) !important;
+}
+
+.edit-tweet-form i:hover{
+    color: var(--dark-blue) !important;
+}
+
+
+/* ____________________________________________________________________________
+____________________________________________________________________________
+____________________________________________________________________________ */
+
+#right{
+    padding: 0 2rem;
+    border-left: var(--border);
+}
+
+#right form input{
+    border: none;
+    width: 100%;
+    background: rgb(230, 236, 240);
+    outline: none;
+}
+
+#right form{
+    padding: 0.5rem 1rem;
+    margin: 0.5rem 0 0;
+    background: rgb(230, 236, 240);
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 1rem;
+    border-radius: 4rem;
+    position: relative;
+}
+
+#right h2{
+    font-weight: var(--bold);
+    font-size: 1.3rem;
+}
+
+#search-results{
+    display: none;
+    position: absolute;
+    top: 2.2rem;
+    left: 0;
+    width: 100%;
+    box-shadow: 0px 3px 6px 3px #eee;
+    border-radius: 0 0 1rem 1rem;
+}
+
+#search-results img{
+    min-width: 3rem;
+    max-width: 3rem;
+    min-height: 3rem;
+    max-height: 3rem;
+    border-radius: 50%;
+}
+
+#search-results>div>div{
+    display: block;
+}
+
+#search-results>div{
+    padding: 1rem;
+    background: var(--light-bg);
+    border-bottom: var(--border);
+}
+
+#search-results>div:last-child{
+    border-radius: 0 0 1rem 1rem;
+    border: none;
+}
+
+#search-results>div p:first-child{
+    font-weight: var(--bold);
+}
+
+#search-results>div p:last-child{
+    color: var(--faded-text);
+}
+
+#right .trends{
+    margin-top: 1rem;
+}
+
+#right .trends>div{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: var(--border);
+    padding: 1rem;
+    background: var(--light-bg);
+}
+
+#right .trends>div:first-child i{
+    color: var(--dark-blue);
+}
+
+#right .trends>div:last-child{
+    border-bottom: none;
+}
+
+#right .trends>div>div p:first-child,
+#right .trends>div>div p:last-child{
+    color: var(--faded-text);
+    font-size: 0.8rem;
+}
+
+#right .trends>div>div p:nth-child(2){
+    font-weight: var(--bold);
+    margin: 0.3rem 0;
+}
+
+#right .trends div:first-child{
+    border-radius: 1rem 1rem 0 0;
+}
+
+#right .trends div:last-child{
+    color: var(--dark-blue);
+    border-radius: 0 0 1rem 1rem;
+}
+
+#right .trends div:hover{
+    background: #eee;
+    cursor: pointer;
+}
+
+#right .trends>div:first-child:hover{
+    background: var(--light-bg);
+    cursor: auto;
+}
+
+#right .who-to-follow{
+    margin-top: 1rem;
+}
+
+#right .who-to-follow>div>article img,
+#search-results img{
+    min-width: 3rem;
+    max-width: 3rem;
+    min-height: 3rem;
+    max-height: 3rem;
+    border-radius: 50%;
+}
+
+#right .who-to-follow>div{
+    border-bottom: var(--border);
+    padding: 1rem;
+    background: var(--light-bg);
+    width: 100%;
+}
+
+#right .who-to-follow>div>article,
+#search-results div{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 1rem;
+}
+
+#right .who-to-follow>div>article p:first-child{
+    font-weight: var(--bold);
+}
+
+#right .who-to-follow>div>article p:last-child{
+    color: var(--faded-text);
+}
+
+#right .who-to-follow>div:first-child{
+    border-radius: 1rem 1rem 0 0;
+}
+
+#right .who-to-follow>div:last-child{
+    border-radius: 0 0 1rem 1rem;
+    border: none;
+    color: var(--dark-blue);
+}
+
+#right>.who-to-follow>div:last-child:hover{
+    background: #eee;
+    cursor: pointer;
+}
+
+#right .follow-btn{
+    margin-left: auto;
+    border: solid 1px var(--dark-blue);
+    color: var(--dark-blue);
+    padding: 0.3rem 1rem;
+    font-weight: var(--bold);
+    border-radius: 4rem;
+}
+
+#right .follow-btn:hover{
+    background: var(--hover-light-blue);
+    cursor: pointer;
+}
+
+/*--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------*/
+
+#messages-people img{
+    min-width: 3rem;
+    max-width: 3rem;
+    min-height: 3rem;
+    max-height: 3rem;
+    border-radius: 50%;
+}
+
+#messages-people>div{
+    padding: 1em;
+    border-bottom: var(--border);
+}
+
+#messages-people>div>article{
+    display: flex;
+    gap: 1em;
+}
+
+#messages-people p:first-child{
+    font-weight: var(--bold);
+}
+
+#messages-people p:last-child{
+    color: var(--faded-text);
+}
