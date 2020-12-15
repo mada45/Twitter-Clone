@@ -24,7 +24,7 @@ try{
     }
 
     foreach($arrayRows as $arrayRow){
-        $query = $db->prepare('SELECT iUserId, sName, sUsername, sUserImage FROM users WHERE :followeeId = iUserId');
+        $query = $db->prepare('SELECT iUserId, sName, sUsername, sUserImage FROM users WHERE :followeeId = iUserId LIMIT 10');
         $query->bindValue('followeeId', $arrayRow->iFolloweeFk);
         $query->execute();
         $newArrayRows = $query->fetchAll();

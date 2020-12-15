@@ -19,13 +19,13 @@ if(! ctype_digit($_POST['tweetId'])){
 require_once __DIR__ .'/../mysql.php';
 
 try{
-    $query = $db->prepare('UPDATE tweets SET iTotalLikes = iTotalLikes+1 WHERE :sessionId = iUserFk AND iTweetId = :tweetId');
+    $query = $db->prepare('INSERT INTO likes VALUES(:tweetId, :sessionId)');
     $query->bindValue('sessionId', $_SESSION['userId']);
     $query->bindValue('tweetId', $_POST['tweetId']);
     $query->execute();
 
     if($query->rowCount() == 0){
-        sendError(500, 'Could not update db', __LINE__);
+        sendError(500, 'Could not insert like', __LINE__);
     }
 
     header('content-Type:applcation/json');
