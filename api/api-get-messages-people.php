@@ -14,7 +14,7 @@ require_once __DIR__.'/../mysql.php';
 
 try{
 
-    $query = $db->prepare('SELECT iFolloweeFk FROM followers WHERE :sessionId = iFollowerFk');
+    $query = $db->prepare('SELECT iUserId, sName, sUsername, sUserImage FROM users JOIN followers ON iFolloweeFk = iUserId WHERE iFollowerFk = :sessionId');
     $query->bindValue('sessionId', $_SESSION['userId']);
     $query->execute();
     $arrayRows = $query->fetchAll();
@@ -23,25 +23,8 @@ try{
         sendError(500, 'Cannot find users', __LINE__);
     }
 
-    foreach($arrayRows as $arrayRow){
-        $query = $db->prepare('SELECT iUserId, sName, sUsername, sUserImage FROM users WHERE :followeeId = iUserId LIMIT 10');
-        $query->bindValue('followeeId', $arrayRow->iFolloweeFk);
-        $query->execute();
-        $newArrayRows = $query->fetchAll();
-
-        if(!$newArrayRows){
-            sendError(500, 'Cannot find users', __LINE__);
-        }
-        // foreach($newArrayRows as $newArrayRow){
-        //     header('Content-Type:application/json');
-        //     echo '{"userId":"'.$newArrayRow->iUserId.'", "name":"'.$newArrayRow->sName.'", "username":"'.$newArrayRow->sUsername.'", "userImage":"'.$newArrayRow->sUserImage.'"}';
-        //     // echo json_encode($newArrayRow);
-        // }
-        
-    }
     header('Content-Type:application/json');
-    echo json_encode($newArrayRows);
-
+    echo json_encode($arrayRows);
 
 }catch(Exception $ex){
     sendError(500, 'Contact system admin', __LINE__);

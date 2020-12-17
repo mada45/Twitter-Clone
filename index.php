@@ -19,40 +19,41 @@ if( ! $_SESSION['userId']){
     <title>Twitter</title>
 </head>
 <body>
+<main>
     <!-- LEFT SECTION START -->
     <section id="left">
         <div>
             <i class="fab fa-twitter"></i>
         </div>
-        <div data-id="home" class="active">
+        <div data-id="home" class="active nav-btn">
             <i class="fas fa-home"></i>
             Home
         </div>
-        <div data-id="explore">
+        <div data-id="explore" class="nav-btn">
             <i data-id="explore" class="fas fa-hashtag"></i>
             Explore
         </div>
-        <div data-id="notifications">
+        <div data-id="notifications" class="nav-btn">
             <i data-id="notifications" class="far fa-bell"></i>
             Notifications
         </div>
-        <div onclick="getMessagesPeople()" data-id="messages">
+        <div onclick="getMessagesPeople()" data-id="messages" class="nav-btn">
             <i data-id="messages" class="far fa-envelope"></i>
             Messages
         </div>
-        <div data-id="bookmarks">
+        <div data-id="bookmarks" class="nav-btn">
             <i data-id="bookmarks" class="far fa-bookmark"></i>
             Bookmarks
         </div>
-        <div data-id="lists">
+        <div data-id="lists" class="nav-btn">
             <i data-id="lists" class="fas fa-list-ul"></i>
             Lists
         </div>
-        <div data-id="profile">
+        <div data-id="profile" class="nav-btn">
             <i data-id="profile" class="far fa-user"></i>
             Profile
         </div>
-        <div data-id="more">
+        <div data-id="more" class="nav-btn">
             <i data-id="more" class="fas fa-ellipsis-h"></i>
             More
         </div>
@@ -85,6 +86,7 @@ if( ! $_SESSION['userId']){
         <?php require_once('components/index-messages-right.php') ?>
     </section> -->
     <!-- RIGHT SECTION END -->
+    </main>
     <script src="app.js"></script>
 </body>
 </html>

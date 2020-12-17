@@ -163,7 +163,7 @@ async function tweet() {
 }
 
 async function editDeletePopup(userId) {
-    let editDeletePopup = document.querySelector(`#user-${userId}`).parentNode.nextElementSibling.childNodes[9]
+    let editDeletePopup = event.target.parentNode.parentNode.nextElementSibling.childNodes[9]
 
     if (editDeletePopup.style.display == 'flex') {
         editDeletePopup.style.setProperty("display", "none", "important")
@@ -208,21 +208,26 @@ async function deleteTweet(deleteTweetId) {
 
 function getEditTweet(editTweetId) {
     let tweetBody = document.querySelector(`#tweet-${editTweetId}`).childNodes[3].childNodes[1].childNodes[3]
-    let userId = document.querySelector(`#user-${editTweetId}`).id
-    editDeletePopup(userId)
-
+    let userId = tweetBody.previousSibling.id
     let editTweetForm = `
     <form class="edit-tweet-form" onsubmit="return false">
         <input type="text" name="editTweetBody" value="${tweetBody.innerHTML}">
         <button onclick="editTweet(${editTweetId})"><i class="fas fa-check"></i></button>
-        <button onclick=""><i class="fas fa-times"></i></button>
+        <button onclick="cancelEditTweet(${editTweetId})"><i class="fas fa-times"></i></button>
     </form>`
 
     if (tweetBody.style.display == 'none') { return }
 
     tweetBody.insertAdjacentHTML('afterend', editTweetForm)
     tweetBody.style.display = 'none'
+    document.querySelectorAll('.edit-delete-tweet').forEach(item => {
+        item.style.setProperty('display', 'none', 'important')
+    })
+}
 
+function cancelEditTweet(editTweetId) {
+    document.querySelector(`.edit-tweet-form`).remove()
+    document.querySelector(`#tweet-${editTweetId}`).childNodes[3].childNodes[1].childNodes[3].style.display = 'block'
 
 }
 
@@ -255,6 +260,7 @@ async function editTweet(editTweetId) {
         tweetBody.innerHTML = jsonResponse.tweetBody
         form.remove()
     }
+
 }
 
 function showSearchResults() {
@@ -337,19 +343,10 @@ async function likeTweet(tweetId) {
     }
 }
 
-let navButtons = document.querySelector('#left').children
+let navButtons = document.querySelectorAll('.nav-btn')
 let subpages = document.querySelectorAll('.mid')
 
-// for (let i = 0; i < navButtons.length; i++) {
-//     if (navButtons[i].classList == 'active') {
-//         let subpageId = navButtons[i].getAttribute('data-id')
-//         document.querySelector(`#${subpageId}`).style.setProperty('display', 'block', 'important')
-//     } else {
-//         document.querySelector('[data-id="home"]').classList.add('active')
-//     }
-// }
-
-for (const item of navButtons) {
+navButtons.forEach((item) =>
     item.addEventListener('click', () => {
         subpages.forEach((item) =>
             item.style.display = 'none'
@@ -358,15 +355,16 @@ for (const item of navButtons) {
         let subpageId = event.target.getAttribute('data-id')
         let subpage = document.querySelector(`#${subpageId}`)
         subpage.style.setProperty('display', 'block', 'important')
-        for (const item of navButtons) {
+        navButtons.forEach((item) =>
             item.classList.remove('active')
-        }
+        )
         event.target.classList.add('active')
     })
-}
+)
 
 async function getMessagesPeople() {
-    // FIRST CLEAR DIV
+    let messagesPeopleDiv = document.querySelector('#messages-people')
+    messagesPeopleDiv.innerHTML = ''
     let connection = await fetch('api/api-get-messages-people.php')
 
     if (!connection.ok) {
@@ -382,10 +380,21 @@ async function getMessagesPeople() {
         return
     }
 
-    let jsonResponse = await connection.json()
-    // console.log(stringResponse)
-    // let jsonResponse = JSON.parse(stringResponse)
-    for (let i = 0; i < jsonResponse.length; i++) {
-        console.log(jsonResponse[i])
-    }
+    let stringResponse = await connection.text()
+    console.log(stringResponse)
+    let jsonResponse = JSON.parse(stringResponse)
+
+    jsonResponse.forEach(jsonItem => {
+        let personDiv = `
+        <div>
+            <article id="user-${jsonItem.iUserId}">
+                <img src="images/${jsonItem.sUserImage}" alt="Profile Image of ${jsonItem.sName}">
+                <div>
+                    <p>${jsonItem.sName}</p>
+                    <p>@${jsonItem.sUsername}</p>
+                </div>
+            </article>
+        </div>`
+        messagesPeopleDiv.insertAdjacentHTML('afterbegin', personDiv)
+    })
 }

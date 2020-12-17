@@ -19,7 +19,7 @@ if(! ctype_digit($_POST['tweetId'])){
 require_once __DIR__ .'/../mysql.php';
 
 try{
-    $query = $db->prepare('INSERT INTO likes VALUES(:tweetId, :sessionId)');
+    $query = $db->prepare('INSERT INTO tweetlikes VALUES(:tweetId, :sessionId)');
     $query->bindValue('sessionId', $_SESSION['userId']);
     $query->bindValue('tweetId', $_POST['tweetId']);
     $query->execute();

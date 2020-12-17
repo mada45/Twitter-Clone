@@ -16,7 +16,7 @@ require_once(__DIR__.'/../mysql.php');
 
 try{
 
-    $query = $db->prepare('SELECT iUserId, sUsername, sName, sUserImage FROM users WHERE sUsername LIKE :searchInput LIMIT 5');
+    $query = $db->prepare('SELECT iUserId, sUsername, sName, sUserImage FROM users WHERE sUsername LIKE :searchInput LIMIT 10');
     $query->bindValue('searchInput', $_GET['username'].'%');
     $query->execute();
     $arrayRows = $query->fetchAll();
